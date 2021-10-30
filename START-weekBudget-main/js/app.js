@@ -39,6 +39,22 @@ class Budget {
 
 
         }
+        // Displays the expense from the form in into the list
+        addExpenseToList(name, amount) {
+            const expenseList = document.querySelector('#expenses ul');
+
+            // Create a li
+            const li = document.createElement('li');
+            li.className ="list-group-item d-flex justify-content-between a lign-items-center";
+            // Create the template
+            li.innerHTML = `
+            ${name}
+            <span class="badge badge-primary badge-pill">$ ${amount}</span>
+            `;
+
+            // Insert into the HTML
+            expenseList.appendChild(li);
+        }
 
     }
  
@@ -93,7 +109,8 @@ addExpenseForm.addEventListener('submit', function(e) {
         html.printMessage('There was an error, all the fields are mandatory', 'alert-danger');
 
     } else {
-        console.log('Correct');
+        html.addExpenseToList(expanseName, amount);
+        
     }
 
 });
