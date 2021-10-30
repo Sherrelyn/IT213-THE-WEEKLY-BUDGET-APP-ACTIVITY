@@ -20,6 +20,26 @@ class Budget {
 
         }
 
+
+        //Displays a message (correct or invalid)
+        printMessage(message, className) {
+            const messageWrapper = document.createElement('div');
+            messageWrapper.classList.add('text-center', 'alert', className);
+            messageWrapper.appendChild(document.createTextNode(message));
+
+            // Insert into HTML
+            document.querySelector('.primary').insertBefore(messageWrapper,addExpenseForm);
+
+            //Clear the error
+            setTimeout(function () {
+                document.querySelector('.primary .alert').remove();
+                addExpenseForm.reset();
+            }, 3000);
+            
+
+
+        }
+
     }
  
 	 
@@ -62,7 +82,19 @@ class Budget {
 
 // When a new expense is added
 addExpenseForm.addEventListener('submit', function(e) {
-    e.preventDefault();
+    e.preventDefault()
+
+    //Read the input values
+    const expanseName = document.querySelector('#expense').value;
+    const amount = document.querySelector('#amount').value;
+
+
+    if(expanseName === '' || amount === '') {
+        html.printMessage('There was an error, all the fields are mandatory', 'alert-danger');
+
+    } else {
+        console.log('Correct');
+    }
 
 });
 
